@@ -1,0 +1,6 @@
+query Wallpapers {
+  GetAllWallpapers {
+    id
+    author
+  }
+}
