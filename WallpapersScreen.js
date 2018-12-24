@@ -12,11 +12,28 @@ const client = new ApolloClient({
   uri: "https://wallpapersapp.glitch.me/"
 });
 
+const LoadingComponent = () => (
+  <View style={{ justifyContent: "center", alignContent: "center" }}>
+    <Text h2 style={{ textAlign: "center" }}>
+      Loading...
+    </Text>
+  </View>
+);
+
+const ErrorComponent = () => (
+  <View style={{ justifyContent: "center", alignContent: "center" }}>
+    <Text h2 style={{ textAlign: "center" }}>
+      Error
+    </Text>
+  </View>
+);
+
+
 const RandomWallpapers = () => (
   <Query query={GET_RANDOM_WALLPAPERS} variables={{ c: 5 }}>
-    {({ loading, error, data }) => {
-      if (loading) return <Text>Loading...</Text>;
-      if (error) return <Text>Error!</Text>;
+    {({ loading, error, data, refetch }) => {
+      if (loading) return <LoadingComponent />;
+      if (error) return <ErrorComponent />;
 
       return (
         <View style={styles.mainContainer}>
@@ -66,12 +83,19 @@ const RandomWallpapers = () => (
                   <Text
                     style={{ fontSize: 20, fontStyle: "italic", margin: 10 }}
                   >
-                    Author: {item.author}
+                    Автор: {item.author}
                   </Text>
                 </View>
               );
             })}
           </Swiper>
+          <View style={{ justifyContent: "center", margin: 15 }}>
+            <Button
+              title="Следующие изображения"
+              titleStyle={{ fontSize: 24 }}
+              onPress={() => refetch()}
+            />
+          </View>
         </View>
       );
     }}
