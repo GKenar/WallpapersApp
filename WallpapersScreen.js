@@ -2,15 +2,10 @@ import React from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Button, Text } from "react-native-elements";
 import Swiper from "react-native-swiper";
-import ApolloClient from "apollo-boost";
-import { ApolloProvider, Query, ApolloConsumer, Mutation } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import GET_All_WALLPAPERS from "./wallpapers.gql";
 import GET_RANDOM_WALLPAPERS from "./randomWallpapers.gql";
-
-const client = new ApolloClient({
-  uri: "https://wallpapersapp.glitch.me/"
-});
 
 const LoadingComponent = () => (
   <View style={{ justifyContent: "center", alignContent: "center" }}>
@@ -27,7 +22,6 @@ const ErrorComponent = () => (
     </Text>
   </View>
 );
-
 
 const RandomWallpapers = () => (
   <Query query={GET_RANDOM_WALLPAPERS} variables={{ c: 5 }}>
@@ -108,11 +102,7 @@ export default class WallpapersScreen extends React.Component {
   }
 
   render() {
-    return (
-      <ApolloProvider client={client}>
-        <RandomWallpapers />
-      </ApolloProvider>
-    );
+    return <RandomWallpapers />;
   }
 }
 
