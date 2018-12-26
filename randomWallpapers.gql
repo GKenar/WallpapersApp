@@ -1,5 +1,5 @@
 query RandomWallpapers($c: Int!) {
-  GetRandomWallpapers(count: $c) {
+  getRandomWallpapers(count: $c) {
     id
     author
   }

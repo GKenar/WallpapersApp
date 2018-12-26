@@ -1,5 +1,5 @@
 query GetSettings {
-  GetSettings @client {
-    maxPicturesCount 
+  getSettings @client {
+    picturesCount
   }
 }

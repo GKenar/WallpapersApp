@@ -61,7 +61,7 @@ const RandomWallpapers = () => (
             loop={false}
             onMomentumScrollEnd={this.onMomentumScrollEnd}
           >
-            {data.GetRandomWallpapers.map((item, index) => {
+            {data.getRandomWallpapers.map((item, index) => {
               return (
                 <View key={item.id} style={styles.wallpaperContainer}>
                   <Image

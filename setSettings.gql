@@ -1,0 +1,3 @@
+mutation SetSettings($picturesCount: Int) {
+  setSettings(picturesCount: $picturesCount) @client
+}
