@@ -20,7 +20,7 @@ export default class App extends React.Component {
     return (
       <ApolloProvider client={client}>
         <View style={styles.container}>
-          <SettingsScreen />
+          <WallpapersScreen />
         </View>
       </ApolloProvider>
     );

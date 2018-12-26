@@ -11,7 +11,6 @@ export default (SettingsScreen = () => (
       if (loading) return null;
       if (error) return <Text style={{ textAlign: "center" }}>Error!</Text>;
 
-      console.log(data.getSettings);
       return (
         <Mutation mutation={SET_SETTINGS}>
           {updateSettings => {

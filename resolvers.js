@@ -10,7 +10,6 @@ export const resolvers = {
   Mutation: {
     setSettings: async (_, variables) => {
       await AsyncStorage.setItem("picturesCount", variables.picturesCount.toString());
-      console.log(variables.picturesCount);
       return null;
     }
   }

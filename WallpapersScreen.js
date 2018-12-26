@@ -3,9 +3,9 @@ import { StyleSheet, View, Image } from "react-native";
 import { Button, Text } from "react-native-elements";
 import Swiper from "react-native-swiper";
 import { Query, Mutation } from "react-apollo";
-import gql from "graphql-tag";
 import GET_All_WALLPAPERS from "./wallpapers.gql";
 import GET_RANDOM_WALLPAPERS from "./randomWallpapers.gql";
+import GET_SETTINGS from "./getSettings.gql";
 
 const LoadingComponent = () => (
   <View style={{ justifyContent: "center", alignContent: "center" }}>
@@ -23,8 +23,8 @@ const ErrorComponent = () => (
   </View>
 );
 
-const RandomWallpapers = () => (
-  <Query query={GET_RANDOM_WALLPAPERS} variables={{ c: 5 }}>
+const RandomWallpapers = (props) => (
+  <Query query={GET_RANDOM_WALLPAPERS} variables={{ c: props.picturesCount }}>
     {({ loading, error, data, refetch }) => {
       if (loading) return <LoadingComponent />;
       if (error) return <ErrorComponent />;
@@ -102,7 +102,16 @@ export default class WallpapersScreen extends React.Component {
   }
 
   render() {
-    return <RandomWallpapers />;
+    return (
+      <Query query={GET_SETTINGS}>
+        {({ loading, data, error }) => {
+          if (loading) return null;
+          if (error) return <ErrorComponent />;
+
+          return <RandomWallpapers picturesCount={data.getSettings.picturesCount} />;
+        }}
+      </Query>
+    );
   }
 }
 
