@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Image } from "react-native";
-import { Button, Text } from "react-native-elements";
+import { Button, Text, Icon } from "react-native-elements";
 import Swiper from "react-native-swiper";
 import { Query, Mutation } from "react-apollo";
 import GET_All_WALLPAPERS from "./wallpapers.gql";
@@ -23,7 +23,7 @@ const ErrorComponent = () => (
   </View>
 );
 
-const RandomWallpapers = (props) => (
+const RandomWallpapers = props => (
   <Query query={GET_RANDOM_WALLPAPERS} variables={{ c: props.picturesCount }}>
     {({ loading, error, data, refetch }) => {
       if (loading) return <LoadingComponent />;
@@ -74,11 +74,25 @@ const RandomWallpapers = (props) => (
                       borderRadius: 10
                     }}
                   />
-                  <Text
-                    style={{ fontSize: 20, fontStyle: "italic", margin: 10 }}
+                  <View
+                    style={{
+                      justifyContent: "flex-start",
+                      alignItems: "center",
+                      margin: 10,
+                    }}
                   >
-                    Автор: {item.author}
-                  </Text>
+                    <Text style={{ fontSize: 20, fontStyle: "italic" }}>
+                      Автор: {item.author}
+                    </Text>
+                    <Icon
+                      raised
+                      name="heart-o"
+                      size={28}
+                      type="font-awesome"
+                      color="red"
+                      onPress={() => console.log("Pressed!")}
+                    />
+                  </View>
                 </View>
               );
             })}
@@ -102,17 +116,19 @@ export default class WallpapersScreen extends React.Component {
   }
 
   static navigationOptions = {
-    title: 'Wallpapers',
+    title: "Wallpapers"
   };
 
   render() {
     return (
-      <Query query={GET_SETTINGS} fetchPolicy='network-only'>
+      <Query query={GET_SETTINGS} fetchPolicy="network-only">
         {({ loading, data, error, refetch }) => {
           if (loading) return null;
           if (error) return <ErrorComponent />;
-          
-          return <RandomWallpapers picturesCount={data.getSettings.picturesCount} />;
+
+          return (
+            <RandomWallpapers picturesCount={data.getSettings.picturesCount} />
+          );
         }}
       </Query>
     );

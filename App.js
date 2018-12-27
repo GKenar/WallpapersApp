@@ -28,7 +28,7 @@ const AppNavigator = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "Wallpapers",
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: "#006AFF"
