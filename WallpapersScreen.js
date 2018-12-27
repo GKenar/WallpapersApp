@@ -107,11 +107,11 @@ export default class WallpapersScreen extends React.Component {
 
   render() {
     return (
-      <Query query={GET_SETTINGS}>
-        {({ loading, data, error }) => {
+      <Query query={GET_SETTINGS} fetchPolicy='network-only'>
+        {({ loading, data, error, refetch }) => {
           if (loading) return null;
           if (error) return <ErrorComponent />;
-
+          
           return <RandomWallpapers picturesCount={data.getSettings.picturesCount} />;
         }}
       </Query>
