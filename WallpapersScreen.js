@@ -101,6 +101,10 @@ export default class WallpapersScreen extends React.Component {
     super(props);
   }
 
+  static navigationOptions = {
+    title: 'Wallpapers',
+  };
+
   render() {
     return (
       <Query query={GET_SETTINGS}>

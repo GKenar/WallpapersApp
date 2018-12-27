@@ -7,15 +7,24 @@ export default class MainScreen extends React.Component {
     super(props);
   }
 
+  static navigationOptions = {
+    title: "Wallpapers App"
+  };
+
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Text h2 style={{ margin: 20 }}>
-          Wallpapers App
-        </Text>
         <View style={styles.buttonsContainer}>
-          <Button buttonStyle={{ margin: 20 }} />
-          <Button buttonStyle={{ margin: 20 }} />
+          <Button
+            buttonStyle={{ margin: 20, height: 50 }}
+            title="Перейти к просмотру"
+            onPress={() => this.props.navigation.navigate("Wallpapers")}
+          />
+          <Button
+            buttonStyle={{ margin: 20, height: 50 }}
+            title="Настройки приложения"
+            onPress={() => this.props.navigation.navigate("Settings")}
+          />
         </View>
       </View>
     );
@@ -27,15 +36,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     justifyContent: "space-evenly",
-    borderColor: 'red',
+    borderColor: "red",
     borderWidth: 2
   },
   buttonsContainer: {
-    flex: 0.5,
+    flex: 0.8,
     backgroundColor: "#fff",
     alignItems: "stretch",
     justifyContent: "center",
-    borderColor: 'blue',
+    borderColor: "blue",
     borderWidth: 2
   }
 });

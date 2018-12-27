@@ -32,7 +32,6 @@ class SettingsFrame extends React.Component {
     super(props);
     this.MIN_PICTURES_COUNT = 3;
     this.MAX_PICTURES_COUNT = 10;
-    this.applySettings = props.applySettings;
 
     this.state = {
       picturesCount: props.picturesCount
@@ -77,7 +76,7 @@ class SettingsFrame extends React.Component {
           <Divider style={{ margin: 20 }} />
           <Button
             title="Применить настройки"
-            onPress={() => this.applySettings({ variables: { picturesCount: this.state.picturesCount } })}
+            onPress={() => this.props.applySettings({ variables: { picturesCount: this.state.picturesCount } })}
           />
         </View>
       </View>
