@@ -7,6 +7,8 @@ import {
   Image
 } from "react-native";
 import { Button, Text } from "react-native-elements";
+import { Query } from "react-apollo";
+import GET_FAVORITES from "./getFavorites.gql";
 
 export default class FavoritesScreen extends React.Component {
   constructor(props) {
@@ -19,35 +21,35 @@ export default class FavoritesScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList
-          data={[1, 2, 3]}
-          renderItem={({ item }) => {
-            return (
-              <TouchableHighlight
-                onPress={() => console.log("Pressed!")}
-                underlayColor="#009FBF"
-              >
-                <View style={styles.itemContainer}>
-                  <Image
-                    source={{
-                      uri: "https://picsum.photos/100/100?image=" + 0
-                    }}
-                    style={{
-                      width: "20%",
-                      height: "100%"
-                    }}
-                  />
-                  <Text h4 style={styles.item}>
-                    {"aaaaaaaaaaaaaa"}
-                  </Text>
-                </View>
-              </TouchableHighlight>
-            );
-          }}
-          keyExtractor={item => item.toString()}
-        />
-      </View>
+      <Query query={GET_FAVORITES}>
+        {({ loading, data, error }) => {
+          if (loading) return null;
+          if (error) return null;
+
+          return (
+            <View style={styles.container}>
+              <FlatList
+                data={[1, 2, 3]}
+                renderItem={({ item }) => {
+                  return (
+                    <TouchableHighlight
+                      onPress={() => console.log("Pressed!")}
+                      underlayColor="#009FBF"
+                    >
+                      <View style={styles.itemContainer}>
+                        <Text h4 style={styles.item}>
+                          {"aaaaaaaaaaaaaa"}
+                        </Text>
+                      </View>
+                    </TouchableHighlight>
+                  );
+                }}
+                keyExtractor={item => item.toString()}
+              />
+            </View>
+          );
+        }}
+      </Query>
     );
   }
 }
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: 'space-between',
+    justifyContent: "center",
     margin: 1,
     padding: 5,
     borderColor: "black",

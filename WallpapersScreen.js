@@ -6,6 +6,8 @@ import { Query, Mutation } from "react-apollo";
 import GET_All_WALLPAPERS from "./wallpapers.gql";
 import GET_RANDOM_WALLPAPERS from "./randomWallpapers.gql";
 import GET_SETTINGS from "./getSettings.gql";
+import GET_FAVORITES from "./getFavorites.gql";
+import STAR_AUTHOR from "./starAuthor.gql";
 
 const LoadingComponent = () => (
   <View style={{ justifyContent: "center", alignContent: "center" }}>
@@ -21,6 +23,24 @@ const ErrorComponent = () => (
       Error
     </Text>
   </View>
+);
+
+const FavoriteAuthors = props => (
+  <Query query={GET_FAVORITES}>
+    {({ loading, data, error }) => {
+      if (loading) return <LoadingComponent />;
+      if (error) return <ErrorComponent />;
+
+      console.log(data.getFavorites.favoriteAuthors);
+
+      return (
+        <RandomWallpapers
+          picturesCount={props.picturesCount}
+          favoriteAuthors={data.getFavorites.favoriteAuthors}
+        />
+      );
+    }}
+  </Query>
 );
 
 const RandomWallpapers = props => (
@@ -76,23 +96,46 @@ const RandomWallpapers = props => (
                   />
                   <View
                     style={{
-                      flexDirection: 'row',
+                      flexDirection: "row",
                       justifyContent: "flex-start",
                       alignItems: "center",
-                      margin: 10,
+                      margin: 10
                     }}
                   >
-                    <Text style={{ fontSize: 20, fontStyle: "italic", marginRight: 10 }}>
+                    <Text
+                      style={{
+                        fontSize: 20,
+                        fontStyle: "italic",
+                        marginRight: 10
+                      }}
+                    >
                       Автор: {item.author}
                     </Text>
-                    <Icon
-                      raised
-                      name="star-o"
-                      size={28}
-                      type="font-awesome"
-                      color="orange"
-                      onPress={() => console.log("Pressed!")}
-                    />
+                    <Mutation
+                      mutation={STAR_AUTHOR}
+                      refetchQueries={[{ query: GET_FAVORITES }]}
+                    >
+                      {starAuthor => {
+                        return (
+                          <Icon
+                            raised
+                            name={
+                              props.favoriteAuthors.includes(item.author)
+                                ? "star"
+                                : "star-o"
+                            }
+                            size={28}
+                            type="font-awesome"
+                            color="orange"
+                            onPress={() =>
+                              starAuthor({
+                                variables: { authorName: item.author }
+                              })
+                            }
+                          />
+                        );
+                      }}
+                    </Mutation>
                   </View>
                 </View>
               );
@@ -128,7 +171,7 @@ export default class WallpapersScreen extends React.Component {
           if (error) return <ErrorComponent />;
 
           return (
-            <RandomWallpapers picturesCount={data.getSettings.picturesCount} />
+            <FavoriteAuthors picturesCount={data.getSettings.picturesCount} />
           );
         }}
       </Query>

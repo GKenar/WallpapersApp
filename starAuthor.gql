@@ -1,0 +1,3 @@
+mutation StarAuthor($authorName: String) {
+  starAuthor(authorName: $authorName) @client
+}
