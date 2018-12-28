@@ -76,20 +76,21 @@ const RandomWallpapers = props => (
                   />
                   <View
                     style={{
+                      flexDirection: 'row',
                       justifyContent: "flex-start",
                       alignItems: "center",
                       margin: 10,
                     }}
                   >
-                    <Text style={{ fontSize: 20, fontStyle: "italic" }}>
+                    <Text style={{ fontSize: 20, fontStyle: "italic", marginRight: 10 }}>
                       Автор: {item.author}
                     </Text>
                     <Icon
                       raised
-                      name="heart-o"
+                      name="star-o"
                       size={28}
                       type="font-awesome"
-                      color="red"
+                      color="orange"
                       onPress={() => console.log("Pressed!")}
                     />
                   </View>

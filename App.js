@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import MainScreen from "./MainScreen.js";
 import WallpapersScreen from "./WallpapersScreen";
 import SettingsScreen from "./SettingsScreen";
+import FavoritesScreen from "./FavoritesScreen";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
@@ -17,15 +18,10 @@ const client = new ApolloClient({
 
 const AppNavigator = createStackNavigator(
   {
-    Home: {
-      screen: MainScreen
-    },
-    Wallpapers: {
-      screen: WallpapersScreen
-    },
-    Settings: {
-      screen: SettingsScreen
-    }
+    Home: MainScreen,
+    Wallpapers: WallpapersScreen,
+    Settings: SettingsScreen,
+    Favorites: FavoritesScreen
   },
   {
     initialRouteName: "Wallpapers",
