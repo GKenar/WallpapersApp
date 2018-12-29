@@ -16,12 +16,17 @@ export default class MainScreen extends React.Component {
       <View style={styles.mainContainer}>
         <View style={styles.buttonsContainer}>
           <Button
-            buttonStyle={{ margin: 20, height: 50 }}
-            title="Перейти к просмотру"
+            buttonStyle={styles.button}
+            title="Перейти к просмотру изображений"
             onPress={() => this.props.navigation.navigate("Wallpapers")}
           />
           <Button
-            buttonStyle={{ margin: 20, height: 50 }}
+            buttonStyle={styles.button}
+            title="Список избранных авторов"
+            onPress={() => this.props.navigation.navigate("Favorites")}
+          />
+          <Button
+            buttonStyle={styles.button}
             title="Настройки приложения"
             onPress={() => this.props.navigation.navigate("Settings")}
           />
@@ -46,5 +51,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderColor: "blue",
     borderWidth: 2
+  },
+  button: {
+    margin: 20,
+    height: 70,
+    borderRadius: 15
   }
 });
