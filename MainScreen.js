@@ -41,16 +41,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     justifyContent: "space-evenly",
-    borderColor: "red",
-    borderWidth: 2
   },
   buttonsContainer: {
     flex: 0.8,
     backgroundColor: "#fff",
     alignItems: "stretch",
     justifyContent: "center",
-    borderColor: "blue",
-    borderWidth: 2
   },
   button: {
     margin: 20,

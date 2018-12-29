@@ -10,7 +10,7 @@ import GET_FAVORITES from "./getFavorites.gql";
 import STAR_AUTHOR from "./starAuthor.gql";
 
 const LoadingComponent = () => (
-  <View style={{ justifyContent: "center", alignContent: "center" }}>
+  <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
     <Text h2 style={{ textAlign: "center" }}>
       Loading...
     </Text>
@@ -18,7 +18,7 @@ const LoadingComponent = () => (
 );
 
 const ErrorComponent = () => (
-  <View style={{ justifyContent: "center", alignContent: "center" }}>
+  <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
     <Text h2 style={{ textAlign: "center" }}>
       Error
     </Text>
@@ -42,7 +42,10 @@ const FavoriteAuthors = props => (
 );
 
 const RandomWallpapers = props => (
-  <Query query={GET_RANDOM_WALLPAPERS} variables={{ count: props.picturesCount, authorName: props.currentAuthor }}>
+  <Query
+    query={GET_RANDOM_WALLPAPERS}
+    variables={{ count: props.picturesCount, authorName: props.currentAuthor }}
+  >
     {({ loading, error, data, refetch }) => {
       if (loading) return <LoadingComponent />;
       if (error) return <ErrorComponent />;
@@ -158,11 +161,11 @@ export default class WallpapersScreen extends React.Component {
   }
 
   static navigationOptions = {
-    title: "Wallpapers"
+    title: "Изображения"
   };
 
   render() {
-    const currentAuthor = this.props.navigation.getParam('currentAuthor', null);
+    const currentAuthor = this.props.navigation.getParam("currentAuthor", null);
 
     return (
       <Query query={GET_SETTINGS} fetchPolicy="network-only">
@@ -171,7 +174,11 @@ export default class WallpapersScreen extends React.Component {
           if (error) return <ErrorComponent />;
 
           return (
-            <FavoriteAuthors {...this.props} currentAuthor={currentAuthor} picturesCount={data.getSettings.picturesCount} />
+            <FavoriteAuthors
+              {...this.props}
+              currentAuthor={currentAuthor}
+              picturesCount={data.getSettings.picturesCount}
+            />
           );
         }}
       </Query>

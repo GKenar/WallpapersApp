@@ -10,7 +10,7 @@ export default class FavoritesScreen extends React.Component {
   }
 
   static navigationOptions = {
-    title: "Favorites"
+    title: "Избранное"
   };
 
   render() {
