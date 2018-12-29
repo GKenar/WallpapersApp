@@ -1,5 +1,5 @@
-query RandomWallpapers($c: Int!) {
-  getRandomWallpapers(count: $c) {
+query RandomWallpapers($count: Int!, $authorName: String) {
+  getRandomWallpapers(count: $count, authorName: $authorName) {
     id
     author
   }

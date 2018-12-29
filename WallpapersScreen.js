@@ -31,11 +31,9 @@ const FavoriteAuthors = props => (
       if (loading) return <LoadingComponent />;
       if (error) return <ErrorComponent />;
 
-      console.log(data.getFavorites.favoriteAuthors);
-
       return (
         <RandomWallpapers
-          picturesCount={props.picturesCount}
+          {...props}
           favoriteAuthors={data.getFavorites.favoriteAuthors}
         />
       );
@@ -44,7 +42,7 @@ const FavoriteAuthors = props => (
 );
 
 const RandomWallpapers = props => (
-  <Query query={GET_RANDOM_WALLPAPERS} variables={{ c: props.picturesCount }}>
+  <Query query={GET_RANDOM_WALLPAPERS} variables={{ count: props.picturesCount, authorName: props.currentAuthor }}>
     {({ loading, error, data, refetch }) => {
       if (loading) return <LoadingComponent />;
       if (error) return <ErrorComponent />;
@@ -164,6 +162,8 @@ export default class WallpapersScreen extends React.Component {
   };
 
   render() {
+    const currentAuthor = this.props.navigation.getParam('currentAuthor', null);
+
     return (
       <Query query={GET_SETTINGS} fetchPolicy="network-only">
         {({ loading, data, error, refetch }) => {
@@ -171,7 +171,7 @@ export default class WallpapersScreen extends React.Component {
           if (error) return <ErrorComponent />;
 
           return (
-            <FavoriteAuthors picturesCount={data.getSettings.picturesCount} />
+            <FavoriteAuthors {...this.props} currentAuthor={currentAuthor} picturesCount={data.getSettings.picturesCount} />
           );
         }}
       </Query>

@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  TouchableHighlight,
-  Image
-} from "react-native";
+import { StyleSheet, View, FlatList, TouchableHighlight } from "react-native";
 import { Button, Text } from "react-native-elements";
 import { Query } from "react-apollo";
 import GET_FAVORITES from "./getFavorites.gql";
@@ -29,16 +23,20 @@ export default class FavoritesScreen extends React.Component {
           return (
             <View style={styles.container}>
               <FlatList
-                data={[1, 2, 3]}
+                data={data.getFavorites.favoriteAuthors}
                 renderItem={({ item }) => {
                   return (
                     <TouchableHighlight
-                      onPress={() => console.log("Pressed!")}
+                      onPress={() =>
+                        this.props.navigation.navigate("Wallpapers", {
+                          currentAuthor: item
+                        })
+                      }
                       underlayColor="#009FBF"
                     >
                       <View style={styles.itemContainer}>
                         <Text h4 style={styles.item}>
-                          {"aaaaaaaaaaaaaa"}
+                          {item}
                         </Text>
                       </View>
                     </TouchableHighlight>

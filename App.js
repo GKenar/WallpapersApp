@@ -24,7 +24,7 @@ const AppNavigator = createStackNavigator(
     Favorites: FavoritesScreen
   },
   {
-    initialRouteName: "Wallpapers",
+    initialRouteName: "Favorites",
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: "#006AFF"
