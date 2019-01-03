@@ -4,7 +4,7 @@ export const resolvers = {
   Query: {
     getSettings: async (_, variables) => {
       const result = await AsyncStorage.getItem("picturesCount");
-      return { __typename: "Settings", picturesCount: parseInt(result) };
+      return { __typename: "Settings", picturesCount: result !== null ? parseInt(result) : 0 };
     },
     getFavorites: async (_, variables) => {
       const favorites =

@@ -11,7 +11,7 @@ import STAR_AUTHOR from "./starAuthor.gql";
 
 const LoadingComponent = () => (
   <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
-    <Text h2 style={{ textAlign: "center" }}>
+    <Text h4 style={{ textAlign: "center" }}>
       Loading...
     </Text>
   </View>
@@ -19,7 +19,7 @@ const LoadingComponent = () => (
 
 const ErrorComponent = () => (
   <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
-    <Text h2 style={{ textAlign: "center" }}>
+    <Text h4 style={{ textAlign: "center" }}>
       Error
     </Text>
   </View>
@@ -177,7 +177,11 @@ export default class WallpapersScreen extends React.Component {
             <FavoriteAuthors
               {...this.props}
               currentAuthor={currentAuthor}
-              picturesCount={data.getSettings.picturesCount}
+              picturesCount={
+                data.getSettings.picturesCount !== 0
+                  ? data.getSettings.picturesCount
+                  : 3
+              }
             />
           );
         }}
