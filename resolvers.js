@@ -4,6 +4,7 @@ export const resolvers = {
   Query: {
     getSettings: async (_, variables) => {
       const result = await AsyncStorage.getItem("picturesCount");
+      console.log("read: " + result);
       return { __typename: "Settings", picturesCount: result !== null ? parseInt(result) : 0 };
     },
     getFavorites: async (_, variables) => {
@@ -18,7 +19,8 @@ export const resolvers = {
         "picturesCount",
         variables.picturesCount.toString()
       );
-      return null;
+      console.log("write: " + variables.picturesCount.toString());
+      return variables.picturesCount;
     },
     starAuthor: async (_, variables) => {
       const favorites =

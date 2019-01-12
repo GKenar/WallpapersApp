@@ -25,7 +25,8 @@
       "bundleIdentifier": "com.mycomp.wallpapersapp"
     },
     "android": {
-      "package": "com.mycomp.wallpapersapp"
+      "package": "com.mycomp.wallpapersapp",
+      "permissions": []
     }
   }
 }

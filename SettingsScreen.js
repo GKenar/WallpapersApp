@@ -18,7 +18,7 @@ export default class SettingsScreen extends React.Component {
 
   render() {
     return (
-      <Query query={GET_SETTINGS}>
+      <Query query={GET_SETTINGS} fetchPolicy="network-only">
         {({ loading, data, error }) => {
           if (loading) return null;
           if (error) return <Text style={{ textAlign: "center" }}>Error!</Text>;
